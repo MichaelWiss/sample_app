@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe "User pages" do
 
+  before do
+    @user = User.new(name: "Example User", email: "user@example.com")
+  end
+
   subject { page }
 
   describe "signup page" do
@@ -11,3 +15,4 @@ describe "User pages" do
     it { should have_title(full_title('Sign up')) }
   end
 end
+
