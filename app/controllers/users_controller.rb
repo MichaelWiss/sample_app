@@ -16,6 +16,8 @@ def destroy
     redirect_to users_url
 end
 
+
+
   
 
 def index
@@ -52,6 +54,11 @@ def create
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
+  end
+
   private
 
     def user_params
@@ -61,12 +68,7 @@ def create
 
     # Before filters
 
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-    end
+    
 
      def correct_user
       @user = User.find(params[:id])
@@ -76,4 +78,6 @@ def create
      def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
+
+
 end
